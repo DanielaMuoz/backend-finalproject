@@ -208,7 +208,7 @@ def read_cart(id):
         return jsonify({'Message': "Error", 'successful': False})
 
 # Endpoint for updating a product
-@app.route("/cart/<id>", methods=["PUT"])
+@app.route("/cart/update/<id>", methods=["PUT"])
 def cart_update(id):
     cart = Cart.query.get(id)
     quantity = request.json['quantity']
@@ -226,7 +226,7 @@ def cart_update(id):
 
 
 # Endpoint for deleting a record
-@app.route("/cart/<id>", methods=["DELETE"])
+@app.route("/cart/delete/<id>", methods=["DELETE"])
 def cart_delete(id):
     cart = Cart.query.get(id)
     db.session.delete(cart)
