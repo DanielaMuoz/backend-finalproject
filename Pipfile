@@ -11,6 +11,7 @@ flask-sqlalchemy = "*"
 flask-httpauth = "*"
 heroku = "*"
 gunicorn = "*"
+flask-cors = "*"
 
 [dev-packages]
 
