@@ -41,7 +41,7 @@ def sql_query(query, params):
 
 # Endpoint for deleting a record
 @app.route("/", methods=["GET","POST"])
-def home(id):
+def home():
     return "API DANIELA"
 # Endpoint to create a new product
 @app.route('/product/add', methods=["POST"])

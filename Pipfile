@@ -10,7 +10,6 @@ marshmallow-sqlalchemy = "*"
 flask-sqlalchemy = "*"
 flask-httpauth = "*"
 heroku = "*"
-npm = "*"
 gunicorn = "*"
 
 [dev-packages]
