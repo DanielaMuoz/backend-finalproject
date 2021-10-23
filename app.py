@@ -38,7 +38,11 @@ def sql_query(query, params):
    cur.execute(query, params)
    rows = cur.fetchall()
    return rows
-    
+
+# Endpoint for deleting a record
+@app.route("/", methods=["GET","POST"])
+def home(id):
+    return "API DANIELA"
 # Endpoint to create a new product
 @app.route('/product/add', methods=["POST"])
 def add_product():
