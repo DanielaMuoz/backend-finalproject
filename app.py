@@ -32,13 +32,6 @@ class ProductSchema(ma.Schema):
 product_schema = ProductSchema()
 products_schema = ProductSchema(many=True)
 
-
-def sql_query(query, params):
-   cur = db.cursor() #conexion to your db
-   cur.execute(query, params)
-   rows = cur.fetchall()
-   return rows
-
 # Endpoint for deleting a record
 @app.route("/", methods=["GET","POST"])
 def home():
@@ -133,10 +126,13 @@ users_schema = UserSchema(many=True)
 @app.route('/login', methods=["POST"])
 def read_user():
     email = request.json['email'] 
-    query = "SELECT * FROM user WHERE email = {0}".format(email)
+    query = "SELECT * FROM user WHERE email = '{0}' ".format(email)
     results = db.session.execute(query)
-    if results != None:
-        return user_schema.jsonify(results), jsonify({'user': results, 'Message': "User found.", 'successful': True})
+
+   
+    if  results :
+        return  jsonify({"user_data":users_schema.dump(results)}) 
+
     else:
         return jsonify({'Message': "User not found.", 'successful': False})
 
@@ -154,7 +150,11 @@ def add_user():
  
     return jsonify(user_schema.dump(record)) 
 
-
+# Endpoint to create a new user
+@app.route('/user', methods=["GET"])
+def user():
+    all=User.query.all()
+    return jsonify(users_schema.dump(all)) 
  
 
 class Cart(db.Model):
