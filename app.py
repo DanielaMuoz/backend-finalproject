@@ -130,10 +130,10 @@ def read_user():
     results = db.session.execute(query)
 
    
-    if  results :
+    if results :
         return  jsonify({"user_data":users_schema.dump(results)}) 
 
-    else:
+    else :
         return jsonify({'Message': "User not found.", 'successful': False})
 
  
