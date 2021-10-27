@@ -105,17 +105,19 @@ def product_delete(id):
   
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(70), unique=True)
     email = db.Column(db.String(70), unique=True)
     password = db.Column(db.String(50), nullable=False)
     carts = db.relationship('Cart', backref='user', lazy=True)
 
-    def __init__(self, email, password):
+    def __init__(self, name, email, password):
+        self.name = name
         self.email = email
         self.password = password 
  
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ('email', 'password')
+        fields = ('name', 'email', 'password')
 
 
 user_schema = UserSchema()
@@ -140,10 +142,11 @@ def read_user():
 # Endpoint to create a new user
 @app.route('/user/add', methods=["POST"])
 def add_user():
+    name = request.json['name'] 
     email = request.json['email'] 
     password = request.json['password']
 
-    record = User(email,password) 
+    record = User(name,email,password) 
 
     db.session.add(record)
     db.session.commit()
