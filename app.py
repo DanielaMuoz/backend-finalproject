@@ -128,7 +128,8 @@ users_schema = UserSchema(many=True)
 @app.route('/login', methods=["POST"])
 def read_user():
     email = request.json['email'] 
-    query = "SELECT * FROM user WHERE email = '{0}' ".format(email)
+    password = request.json['password'] 
+    query = "SELECT * FROM user WHERE email = '{0}' AND password ='{1}' ".format(email,password)
     results = db.session.execute(query)
 
    
